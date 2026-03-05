@@ -57,3 +57,19 @@ module.exports.isReviewAuthor = async(req, res, next) => {
   }
   next();
 };
+
+module.exports.isVerifiedOwner = (req, res, next) => {
+    if(!req.user.isAdmin && !req.user.isVerified){
+        req.flash("error", "You must be a verified villa owner to create listings.");
+        return res.redirect("/listings");
+    }
+    next();
+};
+
+module.exports.isAdmin = (req, res, next) => {
+    if (!req.isAuthenticated() || !req.user.isAdmin) {
+        req.flash("error", "Access denied.");
+        return res.redirect("/listings");
+    }
+    next();
+};

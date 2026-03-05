@@ -130,3 +130,75 @@ body{
      width: 200px !important;
 }
 
+#homePage{
+    background: url("IMG_20260216_194243.jpg.jpeg");
+    height: 100vh;/*100% of viewport that is full web page*/
+    background-size: cover;
+}
+
+.stay{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+}
+
+.booking{
+    border: 1px solid black !important;
+    border-radius: 10px;
+}
+
+.card-img-overlay{
+    border: 2px solid black;
+}
+
+.confirmBooking{
+    height: 50px;
+    width: 400px !important;
+    background-color: white;
+    border: 2px dashed purple;    
+}
+
+.Myb{
+    border: 1px solid black;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+
+  .listing-card {
+    margin-bottom: 20px !important;
+  }
+
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+
+  .navbar-brand {
+    font-size: 18px !important;
+  }
+
+  h1 {
+    font-size: 24px !important;
+  }
+
+}
+
+
+
+.logo{
+    background-color: black ;
+    color: whitesmoke;
+    font-size: xx-large;
+}
+
+.MRV{
+    color: black !important;
+}
+
+/* .host-btn{
+    margin-left: 300px;
+} */
+
+.host{
+    color: white !important;
+}

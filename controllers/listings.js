@@ -1,50 +1,84 @@
 const Listing = require("../models/listing.js");
+const User = require("../models/user");
 
 module.exports.index = async (req, res) => {
-    const allListings =  await Listing.find({});
-    res.render("listings/index.ejs", {allListings});
+    const { category } = req.query;
+
+    let listings;
+
+    if (category) {
+        listings = await Listing.find({ category });
+    } else {
+        listings = await Listing.find({});
+    }
+
+    res.render("listings/index", { listings });
 };
 
-module.exports.filterLogic = async (req, res) => {
-  const { category, location } = req.query;
+module.exports.searchListing = async (req, res) => {
+    const { q } = req.query;
 
-  let filter = {};
+    if (!q) {
+        return res.redirect("/listings");
+    }
 
-  if (category) {
-    filter.category = category;
-  }
+    const listings = await Listing.find({
+        $or: [
+            { title: { $regex: q, $options: "i" } },
+            { location: { $regex: q, $options: "i" } },
+            { country: { $regex: q, $options: "i" } },
+            { category: { $regex: q, $options: "i" } }
+        ]
+    });
 
-  if (location) {
-    filter.location = { $regex: location, $options: "i" };
-  } 
-
-
-  const listings = await Listing.find(filter);
-
-  res.render("listings/index", { listings, query: req.query });
+    res.render("listings/index", { listings });
 };
 
-module.exports.renderNewForm = (req, res) => {
-    res.render("listings/new.ejs");
-};
+// module.exports.filterLogic = async (req, res) => {
+//   const { category, location } = req.query;
+
+//   let filter = {};
+
+//   if (category) {
+//     filter.category = category;
+//   }
+
+//   if (location) {
+//     filter.location = { $regex: location, $options: "i" };
+//   } 
+
+
+//   const listings = await Listing.find(filter);
+
+//   res.render("listings/index", { listings, query: req.query });
+// };
+
+// module.exports.renderNewForm = (req, res) => {
+//     res.render("listings/new.ejs");
+// };
 
 module.exports.showListing = async (req, res) => {
-    let {id} = req.params;
+    let { id } = req.params;
     const listing = await Listing.findById(id)
-    .populate({
-        path: "reviews", 
-        populate: {
-        path: "author",
+.populate("owner")
+.populate({
+    path: "reviews",
+    populate: {
+        path: "author"
     }
-})
-.populate("owner");
+});
+
+if(req.user) {
+    const user = await User.findById(req.user._id);
+    isInWishlist = user.wishlist.includes(id);
+}
+
 if(!listing){
         req.flash("error", "Listing you requested for does not exist!");
-        res.redirect("/listings");
-    }else{
-        // console.log(listing);
-        res.render("listings/show.ejs", { listing });
+        return res.redirect("/listings");
     }
+        // console.log(listing);
+        res.render("listings/show.ejs", { listing, isInWishlist });
 };
 
 module.exports.createListing = async (req, res) => {
@@ -58,7 +92,7 @@ module.exports.createListing = async (req, res) => {
     await newListing.save();
     console.log(newListing);
     req.flash("success", "New Listing Created!");
-    res.redirect("/listings");
+    res.redirect(`/listings/${newListing._id}`);
 };
  
 module.exports.renderEditForm = async (req, res) => {
@@ -69,9 +103,14 @@ module.exports.renderEditForm = async (req, res) => {
         return res.redirect("/listings");
     }
     
-    let originaleImageUrl = listing.image.url;
-    originaleImageUrl = originaleImageUrl.replace("/upload", "/upload/w_250");
-    res.render("listings/edit.ejs", { listing, originaleImageUrl });
+    let originalImageUrl = listing.image?.url
+  ? listing.image.url.replace("/upload", "/upload/w_250")
+  : "";
+    res.render("listings/edit.ejs", { listing, originalImageUrl });
+};
+
+module.exports.renderNewForm = (req, res) => {
+    res.render("listings/new");
 };
 
 module.exports.updateListing = async (req, res) => {

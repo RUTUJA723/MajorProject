@@ -1,0 +1,124 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+.about-hero {
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+              url("../home.jpeg") center/cover no-repeat;
+  height: 70vh;
+}
+
+/* .about{
+    background-image: url("../home.jpeg");
+    background-size: cover;
+    height: 50vh;
+    background-position: center;
+} */
+
+.heading{
+    margin-top: 2rem !important;
+    opacity: 0.7;
+}
+
+.card:hover{
+    box-shadow: 4px 8px 16px black !important;
+}
+
+.image{
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.444) !important;
+}
+
+.quote{
+  background-color: blanchedalmond;
+  color: #222;
+  opacity: 0.7;
+  width: 50%;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+}
+
+h1{
+    font-family: "Montserrat", sans-serif !important;
+}
+
+h4{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+}
+
+.cta-section {
+  background-color: #222;
+}
+</style>
+
+<section class="about-hero text-white d-flex align-items-center">
+  <div class="container text-center about ">
+    <h1 class="display-4 fw-bold heading w-60 offset-0">Majestic Rest Villas</h1>
+    <p class="lead mt-3  w-50 offset-3 ">
+      <h4 class="offset-3 quote">
+        Unwind in Majestic Comfort<br>
+                Where Luxury Meets Rest
+      </h4>
+    </p>
+  </div>
+</section>
+
+<section class="container my-5">
+  <div class="row align-items-center">
+    <div class="col-md-6">
+      <img src="/images/../images.jpg" class="img-fluid rounded shadow image" alt="Luxury Villa">
+    </div>
+    <div class="col-md-6">
+      <h2 class="fw-bold">Who We Are</h2>
+      <p class="text-muted mt-3">
+        Majestic Rest Villas (MRV) is a premium villa rental platform designed 
+        to connect travelers with luxurious, verified, and comfortable stays. 
+        Inspired by global hospitality standards, MRV ensures trust, safety, 
+        and unforgettable experiences.
+      </p>
+      <p class="text-muted">
+        Our mission is to redefine short-term stays by offering handpicked 
+        villas that meet the highest quality standards.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="bg-light py-5 ">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-4">Why Choose MRV?</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="p-4 shadow-sm rounded bg-white card">
+          <h4>✔ Verified Properties</h4>
+          <p class="text-muted">Every villa is verified by our admin team before approval.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-4 shadow-sm rounded bg-white card">
+          <h4>✔ Secure Booking</h4>
+          <p class="text-muted">Safe and transparent booking process for guests & hosts.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-4 shadow-sm rounded bg-white card">
+          <h4>✔ 24/7 Support</h4>
+          <p class="text-muted">We provide dedicated support for a smooth experience.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container my-5 text-center">
+  <h2 class="fw-bold">Our Vision</h2>
+  <p class="text-muted mt-3">
+    To become the most trusted villa rental platform by delivering 
+    excellence in hospitality, transparency in operations, and 
+    unforgettable travel experiences.
+  </p>
+</section>
+
+<section class="cta-section text-white text-center py-5">
+  <div class="container">
+    <h2 class="fw-bold">Ready to Experience Luxury?</h2>
+    <a href="/listings" class="btn btn-light btn-lg mt-3">Explore Villas</a>
+  </div>
+</section>

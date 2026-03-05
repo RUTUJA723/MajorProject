@@ -14,6 +14,7 @@
         opacity: 0.7;
     }
 
+
     .filter:hover{
         opacity: 1;
         cursor: pointer;
@@ -27,10 +28,6 @@
 .filter a i {
         font-size: 0.9rem;
         color: black;
-    }
-
-    div a p {
-        text-decoration: none;
     }
 
     .tax-info{
@@ -49,44 +46,33 @@
 
 </style>
 
+
+<div class="container">
 <div id="filters" class="d-flex justify-content-center gap-4 my-4">
     
 <div class="filter">
-            <div><a href="/listings?category=trending" ><i class="fa-solid fa-fire"></i><p>Trending</p></a></div>
+           <a href="/listings?category=trending" ><i class="fa-solid fa-fire"></i><p>Trending</p></a>
         </div>
         <div class="filter">
-            <div><a href="/listings?category=rooms"><i class="fa-solid fa-bed"></i><p>Rooms</p></a></div>
+            <a href="/listings?category=rooms"><i class="fa-solid fa-bed"></i><p>Rooms</p></a>
         </div>
         <div class="filter">
-            <div><a href="/listings?category=iconicCities"><i class="fa-solid fa-mountain-city"></i><p>Iconic Cities</p></a></div>
+            <a href="/listings?category=cities"><i class="fa-solid fa-mountain-city"></i><p>Iconic Cities</p></a>
         </div>
         <div class="filter">
-            <div><a href="/listings?category=mountains"><i class="fa-solid fa-mountain"></i><p>Mountains</p></a></div>
+            <a href="/listings?category=mountains"><i class="fa-solid fa-mountain"></i><p>Mountains</p></a>
         </div>
         <div class="filter">
-            <div><a href="/listings?category=castles"><i class="fa-brands fa-fort-awesome"></i><p>Castles</p></a></div>
-        </div>
-        <div class="filter">
-            <div><a href="/listings?category=castles"><i class="fa-solid fa-person-swimming"></i><p>Pools</p></a></div>
+            <a href="/listings?category=pools"><i class="fa-solid fa-person-swimming"></i><p>Pools</p></a>
         </div>
          <div class="filter">
-            <div><a href="/listings?category=camping"><i class="fa-solid fa-campground"></i><p>Camping</p></a></div>
+            <a href="/listings?category=camping"><i class="fa-solid fa-campground"></i><p>Camping</p></a>
         </div>
         <div class="filter">
-            <div><a href="/listings?category=farms"><i class="fa-solid fa-cow"></i><p>Farms</p></a></div>
+            <a href="/listings?category=beach"><i class="fa-solid fa-umbrella-beach"></i><p>Beach</p></a>
         </div>
-        <div class="filter">
-            <div><a href="/listings?category=arctic"><i class="fa-regular fa-snowflake"></i><p>Arctic</p></a></div>
-        </div>
-        <div class="filter">
-            <div><a href="/listings?category=domes"><i class="fa-solid fa-igloo"></i><p>Domes</p></a></div>
-        </div>
-        <div class="filter">
-            <div><a href="/listings?category=boats"><i class="fa-solid fa-ship"></i><p>Boats</p></a></div>
-        </div>
-
         <div class="tax-toggle">
-            <div class="form-check-reverse form-switch">
+  <div class="form-check-reverse form-switch">
   <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
   <label class="form-check-label" for="switchCheckDefault">Display total after taxes</label>
 </div>
@@ -94,10 +80,10 @@
     </div>
 
 <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3" >
-    <% for(let listing of allListings){ %>
+    <% for(let listing of listings){ %>
         <a href="/listings/<%= listing._id %>" class="listing-link">
-<div class="card col listing-card">
-  <img src="<%= listing.image.url?listing.image.url:'https://plus.unsplash.com/premium_photo-1681922761659-07483f67b6c7?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' %>" class="card-img-top" alt="listing_image" style="height: 20rem"/>
+<div class="card col listing-card shadow-sm">
+  <img src="<%= listing.image.url?listing.image.url:'https://plus.unsplash.com/premium_photo-1681922761659-07483f67b6c7?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' %>" class="card-img-top img-fluid rounded" alt="listing_image" style="height: 20rem"/>
   <!-- <form action="/users/wishlist/<%= listing._id %>" method="POST">
   <button class="btn btn-outline-danger btn-sm " id="wish">
     ❤️
@@ -113,6 +99,7 @@
 </div> 
 </a>
 <% } %>  
+</div>
 </div>
 
 <script>

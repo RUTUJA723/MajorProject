@@ -1,12 +1,22 @@
 <% layout("/layouts/boilerplate") %>
+<div class="container">
 <div class="row offset-2">
     <div class="col-8 mt-3 offset-2">
     <h3><%= listing.title %></h3>
     </div>
     <div class="card col-6 offset-2 show-card listing-card">
-         <img src="<%= listing.image.url?listing.image.url:'https://plus.unsplash.com/premium_photo-1681922761659-07483f67b6c7?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' %>" class="card-img-top show-img" alt="listing_image">
+         <img src="<%= listing.image.url?listing.image.url:'https://plus.unsplash.com/premium_photo-1681922761659-07483f67b6c7?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' %>" class="card-img-top show-img img-fluid " alt="listing_image">
          <div class="card-body">
-         <p class="card-text"><i>Owned by <%= listing.owner.username %></i></p>
+         <!-- <p class="card-text"><i>Owned by <% if (listing.owner) { %> -->
+  <p>Hosted by <%= listing.owner.username %></p>
+<!-- <% } else { %>
+  <p class="text-danger">Host not available</p>
+<% } %></i></p> -->
+<p>
+    <% if (listing.owner && listing.owner.isVerified) { %>
+  <button class=" bg-success w-50 btn host mb-3">Verified Host</button>
+<% } %>
+</p>
             <p class="card-text"></p><%= listing.description %></p>
             <p class="card-text">&#8377;<%= listing.price.toLocaleString("en-IN") %></p>
             <p class="card-text"><%= listing.location %><br></p>
@@ -15,7 +25,7 @@
     </div>
     <br/>
 
-    <% if(currUser && listing.owner._id.equals(currUser._id)) {%>
+    <% if(currUser && listing.owner && listing.owner._id.equals(currUser._id)) {%>
     <div class="btns">
         <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark col-1 offset-2 edit-btn">Edit</a>
 
@@ -24,6 +34,44 @@
     </form>
     </div>
     <% } %>
+
+    <% if (currUser) { %>
+    <form action="/listings/<%= listing._id %>/toggleWishlist" method="POST">
+    <% if (isInWishlist) { %>
+        <button class="btn btn-outline-danger offset-2 mt-2">
+            ❤️ Remove from Wishlist
+        </button>
+    <% } else { %>
+        <button class="btn btn-outline-danger offset-2 mt-2">
+            ❤️ Add to Wishlist
+        </button>
+    <% } %>
+</form>
+<% } %>
+
+<br/><br/><br/>
+
+<div class="booking col-8 mt-3 offset-2 mb-3">
+<h4 class="offset-2 stay mt-2">Book This Stay</h4>
+
+<form action="/bookings/<%= listing._id %>/book" method="POST">
+
+  <div class="col-8 mt-3 offset-2 mb-3">
+    <label>Check In</label>
+    <input type="date" name="booking[checkIn]" required class="form-control">
+  </div>
+
+  <div class="col-8 mt-3 offset-2 mb-3">
+    <label>Check Out</label>
+    <input type="date" name="booking[checkOut]" required class="form-control">
+  </div>
+
+  <input type="hidden" name="booking[listing]" value="<%= listing._id %>">
+
+  <button type="submit" class="btn btn-danger mb-2">Book Now</button>
+
+</form>
+</div>
 
 
     <div class="col-8 mt-3 offset-2 mb-3">
@@ -80,4 +128,5 @@
             </div>
     </div>
     
+</div>
 </div>

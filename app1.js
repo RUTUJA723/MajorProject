@@ -15,10 +15,13 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
+// const home = require("./views/listings/home.ejs");
 
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
+const adminRouter = require("./routes/admin.js");
+const bookingRoutes = require("./routes/bookings");
 
 const dbUrl = process.env.ATLASDB_URL;
 
@@ -38,6 +41,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
+app.use("/uploads", express.static("uploads"));
 
 const store  = MongoStore.create({
     mongoUrl: dbUrl,
@@ -63,6 +67,7 @@ const sessionOptions = {
     },
 };
 
+
 app.use(session(sessionOptions));
 app.use(flash());
 
@@ -81,10 +86,6 @@ app.use((req, res, next) => {
 });
 
 
-// app.get("/", (req, res) => {
-//     res.send("Hi, i am root");
-// });
-
 // app.get("/demouser", async(req, res) => {
 //     let fakeUser = new User({
 //         email: "student@gmail.com",
@@ -97,7 +98,9 @@ app.use((req, res, next) => {
 
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
+app.use("/bookings", bookingRoutes);
 app.use("/", userRouter);
+app.use("/admin", adminRouter);
 
 //Error handler middlewares
 app.use((req, res, next) => {

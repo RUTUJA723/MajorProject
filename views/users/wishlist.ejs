@@ -1,0 +1,30 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+    .view{
+        margin-left: 10px;
+    }
+</style>
+
+<h2>Your Wishlist ❤️</h2>
+
+<div class="row">
+    <% if (wishlist.length === 0) { %>
+        <p>No items in wishlist yet.</p>
+    <% } %>
+
+    <% wishlist.forEach(listing => { %>
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing_image">
+                <div class="card-body">
+                    <h5 class="card-title"><%= listing.title %></h5>
+                    <p>₹<%= listing.price %></p>
+                    <a href="/listings/<%= listing._id %>" >
+                        <button class="btn  btn-dark edit-btn mb-2 view">View</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    <% }) %>
+</div>

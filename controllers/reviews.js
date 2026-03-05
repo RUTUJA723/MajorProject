@@ -18,7 +18,11 @@ module.exports.createReview = async(req, res) => {
 
 module.exports.destroyReview = async(req, res) => {
     let {id, reviewId} = req.params;
-    await Listing.findByIdAndUpdate(id, {$pull: {reviews: reviewId}});
+    const listing = await Listing.findByIdAndUpdate(id, {$pull: {reviews: reviewId}});
+    if(!listing.owner.equals(res.locals.currUser._id)){
+    req.flash("error", "You are not the author of this listing");
+    return res.redirect(`/listings/${id}`);
+  }
     await Review.findByIdAndDelete(reviewId);
     req.flash("success", "Review Deleted!");
 

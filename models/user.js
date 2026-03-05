@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { isOwner } = require("../middleware");
 const Schema = mongoose.Schema;
 const passportLocalMongoose = require("passport-local-mongoose").default;
 
@@ -7,6 +8,36 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+     isOwner: {
+        type : Boolean,
+        default : false
+    },
+    wishlist: [
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref: "Listing",
+        }
+    ],
+    isVerified : {
+        type: Boolean,
+        default: false
+    },
+    isAdmin: {
+        type : Boolean,
+        default : false
+    },
+    hostRequest: {
+    type: Boolean,
+    default: false
+   },
+   hostDocument: {
+    type: String   // store file path
+   },
+   hostStatus: {
+    type: String,
+    enum: ["pending", "approved", "rejected"],
+    default: null
+   }
 });
 
 userSchema.plugin(passportLocalMongoose);/*You're free to define your User how you like. 

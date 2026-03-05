@@ -1,0 +1,11 @@
+<h2>Book <%= listing.title %></h2>
+
+<form action="/listings/<%= listing._id %>/book" method="POST">
+    <label>Check-in Date:</label>
+    <input type="date" name="checkIn" required>
+
+    <label>Check-out Date:</label>
+    <input type="date" name="checkOut" required>
+
+    <button type="submit">Confirm Booking</button>
+</form>

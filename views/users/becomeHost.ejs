@@ -1,0 +1,14 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-5">
+  <h2>Become a Host</h2>
+
+  <form action="/become-host" method="POST" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label class="form-label">Upload Property Proof</label>
+      <input type="file" name="document" class="form-control" required>
+    </div>
+
+    <button class="btn btn-dark">Submit Request</button>
+  </form>
+</div>

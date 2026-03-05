@@ -27,6 +27,26 @@ module.exports.renderloginForm = (req, res) => {
     res.render("users/login.ejs");
 };
 
+module.exports.renderBecomeHostForm = (req, res) => {
+  res.render("users/becomeHost");
+};
+
+module.exports.sendHostRequest = async (req, res) => {
+    const user = await User.findById(req.user._id);
+
+    user.hostRequest = true;
+    user.hostStatus = "pending";
+
+    if (req.file) {
+        user.hostDocument = req.file.path;
+    }
+
+    await user.save();
+
+    req.flash("success", "Host request sent successfully!");
+    res.redirect("/listings");
+};
+
 module.exports.login =  async(req, res) => {
         req.flash("success", "Welcome back to MajesticRestVillas!");
         let redirectUrl = res.locals.redirectUrl || "/listings";
