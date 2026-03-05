@@ -70,8 +70,8 @@ if (!totalPrice || totalPrice <= 0) {
       quantity: 1,
     },
   ],
-  success_url: `http://localhost:8080/bookings/success?bookingId=${booking._id}`,
-  cancel_url: `http://localhost:8080/listings/${listingId}`,
+  success_url: `https://majorproject-f2xk.onrender.com/bookings/success?bookingId=${booking._id}`,
+  cancel_url: `https://majorproject-f2xk.onrender.com/listings/${listingId}`,
 });
 
 // Redirect user to Stripe payment page
