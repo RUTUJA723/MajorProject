@@ -121,7 +121,7 @@ body{
 }
 
 .nav-link:hover{
-     box-shadow: 4px 8px 16px black !important;
+     box-shadow: 1px 2px 4px gray !important;
      color: black !important;
 }
 
@@ -186,8 +186,8 @@ body{
 
 
 .logo{
-    background-color: black ;
-    color: whitesmoke;
+    background-color: whitesmoke ;
+    color: #fe424d;
     font-size: xx-large;
 }
 
