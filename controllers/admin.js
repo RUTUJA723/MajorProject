@@ -1,5 +1,6 @@
 const Listing = require("../models/listing");
 const User = require("../models/user");
+const Booking = require("../models/booking");
 
 module.exports.listings = async (req, res) => {
     const listings = await Listing.find({});
@@ -14,6 +15,28 @@ module.exports.dashboard = async (req, res) => {
 
   res.render("admin/dashboard", { requests });
 };
+
+
+module.exports.adminDashboard = async (req, res) => {
+  try {
+
+    const requests = []; // your existing host requests
+    const bookings = await Booking.find({})
+      .populate("user")
+      .populate("listing");
+
+    res.render("admin/dashboard", {
+      requests,
+      bookings
+    });
+
+  } catch (err) {
+    console.log(err);
+    req.flash("error", "Error loading dashboard");
+    res.redirect("/");
+  }
+};
+
 
 module.exports.approveHost = async (req, res) => {
   const user = await User.findById(req.params.id);

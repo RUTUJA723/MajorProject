@@ -27,6 +27,59 @@
       </form>
     </div>
   <% }) %>
+
+  <div class="card shadow p-4 mt-4">
+
+<h4 class="mb-3">All User Bookings</h4>
+
+<% if(bookings.length === 0){ %>
+
+<p>No bookings yet</p>
+
+<% } %>
+
+<% bookings.forEach(booking => { %>
+
+<div class="border rounded p-3 mb-3">
+
+<p><strong>User:</strong> <%= booking.user.username %></p>
+
+<p><strong>Villa:</strong>
+<%= booking.listing.title %>
+</p>
+
+<p>
+   <% if (booking.listing && booking.listing.image) { %>
+        <img src="<%= booking.listing.image.url %>" 
+             class="card-img-top" 
+             style="height:250px; object-fit:cover; border-radius:15px 15px 0 0;">
+             <% } %>
+</p> 
+
+<p><strong>Check In:</strong>
+<%= booking.checkIn.toDateString() %>
+</p>
+
+<p><strong>Check Out:</strong>
+<%= booking.checkOut.toDateString() %>
+</p>
+
+<p><strong>Total Price:</strong>
+₹<%= booking.totalPrice %>
+</p>
+
+<p>
+<strong>Status:</strong>
+<span class="badge bg-success">
+<%= booking.paymentStatus %>
+</span>
+</p>
+
+</div>
+
+<% }) %>
+
+</div>
 </div>
 
 </div> <!-- closing admin-content -->

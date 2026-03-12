@@ -4,7 +4,7 @@ const adminController = require("../controllers/admin");
 const { isAdmin } = require("../middleware");
 
 // Dashboard
-router.get("/dashboard", isAdmin, adminController.dashboard);
+router.get("/dashboard", isAdmin, adminController.adminDashboard);
 
 // Host Requests page
 router.get("/hosts", isAdmin,adminController.dashboard); 
@@ -12,6 +12,9 @@ router.get("/hosts", isAdmin,adminController.dashboard);
 
 // Listings page
 router.get("/listings",isAdmin, adminController.listings);
+
+//All Bookings
+// router.get("/bookings",isAdmin, adminController.getAllBookings);
 
 // Approve
 router.post("/approve/:id", isAdmin, adminController.approveHost);

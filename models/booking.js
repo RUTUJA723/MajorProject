@@ -12,6 +12,7 @@ const bookingSchema = new Schema({
     ref: "User",
     required: true
   },
+  villaName: String,
   checkIn: {
     type: Date,
     required: true
@@ -28,7 +29,11 @@ const bookingSchema = new Schema({
     type: String,
     enum: ["pending", "paid"],
     default: "pending"
-  }
+  },
+  createdAt: {
+        type: Date,
+        default: Date.now()
+    },
 }, { timestamps: true });
 
 module.exports = mongoose.model("Booking", bookingSchema);
