@@ -7,7 +7,7 @@ const { isAdmin } = require("../middleware");
 router.get("/dashboard", isAdmin, adminController.adminDashboard);
 
 // Host Requests page
-router.get("/hosts", isAdmin,adminController.dashboard); 
+router.get("/hosts", isAdmin,adminController.adminDashboard); 
 // (for now we can reuse same controller)
 
 // Listings page

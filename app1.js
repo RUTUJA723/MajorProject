@@ -88,7 +88,7 @@ app.use((req, res, next) => {
 app.get("/", (req, res) => {
     res.render("listings/about");
 })
-
+  
 // app.get("/demouser", async(req, res) => {
 //     let fakeUser = new User({
 //         email: "student@gmail.com",

@@ -7,15 +7,6 @@ module.exports.listings = async (req, res) => {
     res.render("admin/listings", { listings });
 };
 
-module.exports.dashboard = async (req, res) => {
-  const requests = await User.find({
-    hostRequest: true,
-    hostStatus: "pending",
-  });
-
-  res.render("admin/dashboard", { requests });
-};
-
 
 module.exports.adminDashboard = async (req, res) => {
   try {

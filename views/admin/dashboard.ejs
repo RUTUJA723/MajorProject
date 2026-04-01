@@ -32,7 +32,7 @@
 
 <h4 class="mb-3">All User Bookings</h4>
 
-<% if(bookings.length === 0){ %>
+<% if(!bookings || bookings.length === 0){ %>
 
 <p>No bookings yet</p>
 
@@ -44,9 +44,16 @@
 
 <p><strong>User:</strong> <%= booking.user.username %></p>
 
+<p>
+  <strong>Mobile:</strong> 
+  <%= booking.user.mobile ? booking.user.mobile : "Not Provided" %>
+</p>
+
 <p><strong>Villa:</strong>
 <%= booking.listing.title %>
 </p>
+
+
 
 <p>
    <% if (booking.listing && booking.listing.image) { %>
